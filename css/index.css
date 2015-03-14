@@ -1,0 +1,130 @@
+﻿body {
+    background-color: ivory;
+    padding: 20px 10px;
+}
+
+.calendar-container {
+    min-width: 700px;
+}
+
+.calendar-navigator {
+    padding: 20px 0;
+}
+
+.cell-content {
+    width: 95%;
+    height: 100%;
+    overflow: hidden;
+    border-top: 1px solid;
+    padding: 0px 5px;
+}
+
+.div-table-col.inactive .cell-content {
+    border: none;
+}
+
+.cell-content .event-title {
+    margin-top: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    word-wrap: break-word;
+}
+
+    .cell-content .event-title:hover {
+        text-decoration: underline;
+    }
+
+.cell-content .day-header {
+    text-align: right;
+    padding-top: 2px;
+}
+
+
+.div-table-col:hover .cell-content .day-header .day,
+.div-table-col.inactive:hover .cell-content .day-header .day {
+    border: 1px dotted #333;
+}
+
+.div-table-col.inactive .cell-content .day-header {
+    border: none;
+}
+
+    .div-table-col.inactive .cell-content .day-header .day {
+        text-decoration: none;
+        font-weight: 100;
+        color: #CFCFCF;
+    }
+
+.div-table-col.has-event .cell-content {
+    background-color: #dcf1db
+}
+
+.div-table-col.inactive.has-event .cell-content {
+    background-color: #E8E8E8;
+}
+
+.cell-content .day-header .day {
+    background-color: white;
+    border-radius: 24px;
+    width: 24px;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    border: 1px solid;
+}
+
+.edit-event {
+    cursor: pointer;
+}
+
+.cell-content .day-header .edit-event {
+    float: left;
+    margin-top: 2px;
+    color: #9D9D9D;
+}
+
+    .cell-content .day-header .edit-event:hover {
+        color: #333;
+    }
+
+.form-control-inline .form-control,
+.form-control.form-control-inline {
+    display: inline-block;
+    width: auto;
+}
+
+
+
+.div-midle {
+    display: table;
+    margin: 0 auto;
+}
+
+.div-table {
+    display: table;
+    width: auto;
+}
+
+.div-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+}
+
+.div-table-col {
+    float: left;
+    display: table-column;
+    width: 100px;
+    height: 60px;
+}
+
+.calendar-header .div-table-col {
+    font-weight: bold;
+    height: 40px;
+}
+
+/*Bootstrap owerriden*/
+.form-control {
+    border-color: #333;
+}
