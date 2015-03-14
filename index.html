@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Events Calendar</title>
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="libs/jquery-ui-1.11.3/jquery-ui.css" />
+    <link rel="stylesheet" href="css/index.css" />
+
+</head>
+<body>
+
+    <div class="calendar-container div-midle">
+        <div id="calendar-header"></div>
+        <div id="calendar-grid" class="div-table"></div>
+    </div>
+    <div id="event-modal"></div>
+
+    <!-- Templates -->
+
+    <!-- Cell -->
+    <script type="text/template" id="cell-template">
+        <div class="cell-content" title="<%= date.toLocaleDateString()%>">
+            <div class="day-header">
+                <span class="glyphicon glyphicon-edit edit-event" title="Add/Edit Event"></span>
+                <span class="day"><%= date.getDate() %></span>
+            </div>
+            <div class="event-title edit-event" title="Edit Event"><%= event ? event.attributes.title : null %>  </div>
+        </div>
+    </script>
+
+    <!-- Event Modal-->
+    <script type="text/template" id="event-modal-template">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Event <%=date.toLocaleDateString()%></h4>
+                </div>
+                <div class="modal-body">
+                    <label for="txt-title">Title</label>
+                    <input type="text" id="txt-title" class="form-control" value="<%=title%>" />
+                    <label for="txt-note">Note</label>
+                    <textarea id="txt-note" class="form-control" rows="3"><%=note%></textarea>
+                </div>
+                <div class="modal-footer form-control-inline">
+                    <button type="button" id="btn-save" class="form-control">Save</button>
+                    <button type="button" id="btn-delete" class="form-control">Clear</button>
+                </div>
+            </div>
+        </div>
+
+    </script>
+
+    <!-- Row -->
+    <script type="text/template" id="row-template">
+        <div class="div-table-row">
+        </div>
+    </script>
+
+
+    <!-- Header -->
+    <script type="text/template" id="calendar-header-template">
+        <div class="calendar-navigator">
+            <div class="control div-midle form-control-inline">
+                <button class="form-control" id="btn-prev">
+                    <span class="glyphicon glyphicon-menu-left "></span>
+                </button>
+
+                <select id="sel-year" class="form-control">
+                    <% for(var i = appConfig.minYear; i<= appConfig.maxYear; i++){ %>
+                    <option value="<%= i %>"
+                        <%if(year == i){%> selected="selected" <%}%> >
+                        <%= i %>
+                    </option>
+                    <%}%>
+                </select>
+                <select id="sel-month" class="form-control">
+                    <% for(var i = 0; i< 12; i++){ %>
+                    <option value="<%= i %>"
+                        <%if(month == i){%> selected="selected" <%}%>  >
+                        <%= datesHelper.getMonthNameByIndex(i) %>
+                    </option>
+                    <%}%>
+                </select>
+                <button class="form-control" id="btn-next">
+                    <span class="glyphicon glyphicon-menu-right "></span>
+                </button>
+            </div>
+        </div>
+        <div class="div-table calendar-header">
+            <div class="div-table-row">
+                <%for(var i =0; i < appConfig.daysNames.length; i++ ){%>
+                <div class="div-table-col">
+                    <%=datesHelper.getDayNameByIndex(i)%>
+                </div>
+                <%}%>
+            </div>
+        </div>
+    </script>
+
+    <script src="libs/jquery-1.9.1.js"></script>
+    <script src="libs/jquery-ui-1.11.3/jquery-ui.js"></script>
+    <script src="libs/underscore.js"></script>
+    <script src="libs/backbone.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.js"></script>
+
+    <script src="appConfig.js"></script>
+    <script src="utils/datesHelper.js"></script>
+
+    <script src="events/globalEvents.js"></script>
+
+    <script src="models/eventModel.js"></script>
+    <script src="services/eventsStorageService.js"></script>
+    <script src="models/cellModel.js"></script>
+    <script src="models/calendarModel.js"></script>
+
+    <script src="views/cellView.js"></script>
+    <script src="views/calendarGridView.js"></script>
+    <script src="views/calendarHeaderView.js"></script>
+    <script src="views/eventModalView.js"></script>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
