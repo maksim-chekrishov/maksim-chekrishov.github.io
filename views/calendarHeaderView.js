@@ -3,7 +3,7 @@
     return Backbone.View.extend({
         initialize: function () {
             this.template = _.template($("#calendar-header-template").html());
-            this.listenTo(this.model, "change", this.update);
+            this.listenTo(this.model, "change", this.render);
         },
         events: {
             "click #btn-prev": "goPreviousMonth",
@@ -14,14 +14,6 @@
 
         updateUrl: function () {
             app.navigate("year/" + this.model.attributes.year + "/month/" + this.model.attributes.month);
-        },
-        update: function(){
-            this.updateSelected();
-            this.updateUrl();
-        },
-        updateSelected: function () {
-            $("#sel-month").val(this.model.attributes.month);
-            $("#sel-year").val(this.model.attributes.year);
         },
         addMonthToModel: function (month) {
             var newDate = datesHelper.addMonths(this.model.toDate(), month);
@@ -45,14 +37,19 @@
             this.addMonthToModel(1);
         },
         changeMonth: function (e) {
-            this.model.set({ month: $(e.target).val()});
+            this.model.set({ month: $(e.target).val() });
         },
         changeYear: function (e) {
             this.model.set({ year: $(e.target).val() });
         },
         render: function () {
-            this.$el.html(this.template(this.model.toJSON()));
-            
+            var data = _.extend({
+                isMinDate: this.isMinDate(),
+                isMaxDate: this.isMaxDate()
+            }, this.model.attributes);
+
+            this.$el.html(this.template(data));
+            this.updateUrl();
             return this;
         }
     });

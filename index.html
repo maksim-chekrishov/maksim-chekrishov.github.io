@@ -17,7 +17,6 @@
     <div id="event-modal"></div>
 
     <!-- Templates -->
-
     <!-- Cell -->
     <script type="text/template" id="cell-template">
         <div class="cell-content" title="<%= date.toLocaleDateString()%>">
@@ -64,7 +63,10 @@
     <script type="text/template" id="calendar-header-template">
         <div class="calendar-navigator">
             <div class="control div-midle form-control-inline">
-                <button class="form-control" id="btn-prev">
+                <button class="form-control" id="btn-prev"
+                    <% if(isMinDate){%>
+                    disabled="disabled"
+                    <%} %> >
                     <span class="glyphicon glyphicon-menu-left "></span>
                 </button>
 
@@ -84,7 +86,10 @@
                     </option>
                     <%}%>
                 </select>
-                <button class="form-control" id="btn-next">
+                <button class="form-control" id="btn-next"
+                    <% if(isMaxDate){%>
+                    disabled="disabled"
+                    <%} %> >
                     <span class="glyphicon glyphicon-menu-right "></span>
                 </button>
             </div>
