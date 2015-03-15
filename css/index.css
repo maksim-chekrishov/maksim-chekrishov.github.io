@@ -81,7 +81,7 @@
     cursor: pointer;
 }
 
-.cell-content .day-header .edit-event {
+.edit-icon.edit-event {
     float: left;
     margin-top: 2px;
     color: #9D9D9D;

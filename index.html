@@ -21,8 +21,8 @@
     <script type="text/template" id="cell-template">
         <div class="cell-content" title="<%= date.toLocaleDateString()%>">
             <div class="day-header">
-                <span class="glyphicon glyphicon-edit edit-event" title="Add/Edit Event"></span>
-                <span class="day"><%= date.getDate() %></span>
+                <span class="glyphicon glyphicon-edit edit-icon edit-event" title="Add/Edit Event"></span>
+                <span class="day"><%= date.getDate()  %></span>
             </div>
             <div class="event-title edit-event" title="Edit Event"><%= event ? event.attributes.title : null %>  </div>
         </div>

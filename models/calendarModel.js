@@ -18,8 +18,9 @@
             year: date.getFullYear(),
             month: date.getMonth()
         });
-
-        !this.isValid() && this.set(this.defaults());
+        if (!CalendarModel.isValidCalendarDate(date)) {
+            this.set(this.defaults());
+        }
     },
     isValid: function () {
         return CalendarModel.isValidCalendarDate(this.toDate())
