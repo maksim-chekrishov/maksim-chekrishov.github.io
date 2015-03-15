@@ -21,20 +21,33 @@
     },
 
     onDateChange: function (e) {
+        this.calcutalateBoundaryDates()
+        this.showAnimatinon(e.previousAttributes())
+            .always(this.render.bind(this));
+    },
 
-        var shiftDirrection = +new CalendarModel(e.previousAttributes()).toDate() < +this.model.toDate()
+    showAnimatinon: function (previousAttributes) {
+        var shiftDirrection = +new CalendarModel(previousAttributes).toDate() < +this.model.toDate()
                 ? "left"
                 : "right";
 
-        this.calcutalateBoundaryDates();
         if (this.currentCellViews && Object.keys(this.currentCellViews).length) {
-            this.hideCellViews(shiftDirrection).then(this.render.bind(this));
-            return;
+
+            if (this._animationDeferred && this._animationDeferred.promise().state() == "pending") {
+                return this._animationDeferred
+                    .reject()
+                    .promise();
+            }
+
+            this._animationDeferred = $.Deferred();
+
+            this.hideCellViews(shiftDirrection)
+                .then(this._animationDeferred.resolve);
+
+            return this._animationDeferred.promise();
         }
 
-        this.render();
     },
-
     rowTemplate: _.template($("#row-template").html()),
 
     calcutalateBoundaryDates: function () {
@@ -96,7 +109,7 @@
                 $currentRowContainer = $tempContainer.children().last();
                 weekIndex++;
             }
-            
+
 
             var cellView = new CellView({ model: cellModel });
             $currentRowContainer.append(cellView.render().$el);
