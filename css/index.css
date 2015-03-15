@@ -43,9 +43,14 @@
 .div-table-col:hover .cell-content .day-header .day {
     border: 1px dotted;
 }
+.div-table-col:hover  .edit-event {
+        color: #333;
+ }
+
 .div-table-col.inactive:hover .cell-content .day-header .day {
     border-color:#333;
 }
+
 
 .div-table-col.inactive .cell-content .day-header {
     border: none;
@@ -87,9 +92,7 @@
     color: #9D9D9D;
 }
 
-    .cell-content .day-header .edit-event:hover {
-        color: #333;
-    }
+   
 
 .form-control-inline .form-control,
 .form-control.form-control-inline {
