@@ -21,26 +21,29 @@
     },
 
     onDateChange: function (e) {
+        var that = this;
         this.calcutalateBoundaryDates()
-        this.showAnimatinon(e.previousAttributes())
-            .always(this.render.bind(this));
+
+        this.showAnimation(e.previousAttributes())
+            .done(this.render.bind(this));
+
     },
 
-    showAnimatinon: function (previousAttributes) {
+    showAnimation: function (previousAttributes) {
         var shiftDirrection = +new CalendarModel(previousAttributes).toDate() < +this.model.toDate()
                 ? "left"
                 : "right";
 
         if (this.currentCellViews && Object.keys(this.currentCellViews).length) {
-
-            if (this._animationDeferred && this._animationDeferred.promise().state() == "pending") {
-                return this._animationDeferred
-                    .reject()
-                    .promise();
+           
+            if (this._animationDeferred && this._animationDeferred.state() == "pending") {
+                this._animationDeferred.resolve();
             }
 
-            this._animationDeferred = $.Deferred();
-
+            if (!this._animationDeferred || this._animationDeferred.state() == "resolved") {
+                this._animationDeferred = $.Deferred();
+            }
+            
             this.hideCellViews(shiftDirrection)
                 .then(this._animationDeferred.resolve);
 
