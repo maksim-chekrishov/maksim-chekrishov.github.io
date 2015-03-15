@@ -4,8 +4,7 @@ var CellView = Backbone.View.extend({
         var res = ["div-table-col"];
         var attributes = this.model.attributes;
 
-        !attributes.isActive && res.push("inactive");
-        attributes.isSelected && res.push("selected");
+        attributes.currentMonth != attributes.date.getMonth() && res.push("inactive");
         attributes.event && res.push("has-event");
 
         return res.join(" ");
@@ -22,7 +21,7 @@ var CellView = Backbone.View.extend({
     },
 
     editEvent: function () {
-        this.gridView.trigger(CalendarGridView.events.editEventClick, this.model);
+        this.trigger(CalendarGridView.events.editEventClick, this);
     },
     render: function () {
         this.$el.empty()
@@ -33,6 +32,9 @@ var CellView = Backbone.View.extend({
     },
     getAnimationDuration: function (shiftDirection) {
         var dayIndex = this.model.attributes.date.getDay();
+        var date = this.model.attributes.date;
+        var weekIndex = 0;
+
         var k = shiftDirection == "left" ? dayIndex : 6 - dayIndex;
         return 200 + Math.pow(k+1,2) * 20;
     },

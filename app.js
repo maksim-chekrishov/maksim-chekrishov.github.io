@@ -6,8 +6,8 @@
         '*notFound': 'showCalendar'
     },
 
-    showEventModal: function (cellModel) {
-        var eventForEdit = cellModel.attributes.event || new EventModel({ date: cellModel.attributes.date });
+    showEventModal: function (cellView) {
+        var eventForEdit = cellView.model.attributes.event || new EventModel({ date: cellView.model.attributes.date });
 
         if (this.eventView) {
             this.eventView.model.set(eventForEdit.attributes);

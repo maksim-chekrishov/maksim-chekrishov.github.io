@@ -67,7 +67,9 @@
     getCellViewLookupKey: function(date){
         return date.getFullYear() + "." + date.getMonth() + "." + date.getDate();
     },
-
+    cellViewEventsHandler: function(eventName, cellView){
+        this.trigger(eventName, cellView);
+    },
     render: function () {
         this.remove();
 
@@ -82,7 +84,7 @@
 
             var cellModel = new CellModel({
                 date: currentCellDate,
-                isActive: currentCellDate.getMonth() == this.model.attributes.month,
+                currentMonth: this.model.attributes.month,
                 event: eventModel
             });
 
@@ -94,8 +96,10 @@
                 $currentRowContainer = $tempContainer.children().last();
             }
 
-            var cellView = new CellView({ model: cellModel, gridView: this });
+            var cellView = new CellView({ model: cellModel});
             $currentRowContainer.append(cellView.render().$el);
+
+            this.listenTo(cellView, "all", this.cellViewEventsHandler.bind(this));
 
             this.currentCellViews[this.getCellViewLookupKey(currentCellDate)] = cellView;
 
@@ -107,5 +111,7 @@
 });
 
 CalendarGridView.events = {
+    /*Event arguments:
+    CellView cellView*/
     editEventClick: "editEventClick"
 };
