@@ -32,11 +32,11 @@ var CellView = Backbone.View.extend({
     },
     getAnimationDuration: function (shiftDirection) {
         var dayIndex = this.model.attributes.date.getDay();
-        var date = this.model.attributes.date;
-        var weekIndex = 0;
 
         var k = shiftDirection == "left" ? dayIndex : 6 - dayIndex;
-        return 200 + Math.pow(k+1,2) * 20;
+        var w = this.model.attributes.weekIndex ;
+
+        return w * 150  + Math.pow(k + 1, 2) * 15;
     },
     hide: function (shiftDirection) {
         var def = $.Deferred();

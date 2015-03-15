@@ -1,6 +1,6 @@
 ﻿var CalendarGridView = Backbone.View.extend({
 
-    className:"calendar-grid",
+    className: "calendar-grid",
 
     initialize: function () {
         var onDateChangeHandler = this.onDateChange.bind(this);
@@ -15,7 +15,7 @@
         if (+date >= +this.from && +date <= +this.to) {
             var changedViewKey = this.getCellViewLookupKey(date);
             var newEventModel = eventAttributes ? new EventModel(eventAttributes) : null;
-            
+
             this.currentCellViews[changedViewKey].model.set({ event: newEventModel });
         }
     },
@@ -53,7 +53,7 @@
     hideCellViews: function (shiftDirrection) {
         var that = this;
         var deferreds = [];
-        for(var key in this.currentCellViews){
+        for (var key in this.currentCellViews) {
             deferreds.push(this.currentCellViews[key].hide(shiftDirrection));
         }
 
@@ -64,10 +64,10 @@
         this.$el.empty();
     },
 
-    getCellViewLookupKey: function(date){
+    getCellViewLookupKey: function (date) {
         return date.getFullYear() + "." + date.getMonth() + "." + date.getDate();
     },
-    cellViewEventsHandler: function(eventName, cellView){
+    cellViewEventsHandler: function (eventName, cellView) {
         this.trigger(eventName, cellView);
     },
     render: function () {
@@ -76,7 +76,8 @@
         var currentCellDate = this.from;
         var $tempContainer = $("<div>");
         var $currentRowContainer;
-        
+        var weekIndex = 0;
+
         while (+currentCellDate <= +this.to) {
             //eventsStorage is dictionary,  ~O(n). 
             var eventAttributes = eventsStorageService.get(currentCellDate);
@@ -85,18 +86,19 @@
             var cellModel = new CellModel({
                 date: currentCellDate,
                 currentMonth: this.model.attributes.month,
-                event: eventModel
+                event: eventModel,
+                weekIndex: weekIndex
             });
 
-            
-
-            //create new week row
+            //create new row 
             if (currentCellDate.getDay() == 0) {
                 $tempContainer.append(this.rowTemplate());
                 $currentRowContainer = $tempContainer.children().last();
+                weekIndex++;
             }
+            
 
-            var cellView = new CellView({ model: cellModel});
+            var cellView = new CellView({ model: cellModel });
             $currentRowContainer.append(cellView.render().$el);
 
             this.listenTo(cellView, "all", this.cellViewEventsHandler.bind(this));
