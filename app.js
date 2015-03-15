@@ -6,31 +6,35 @@
         '*notFound': 'showCalendar'
     },
 
-    onEventEdit: function(cellModel){
+    showEventModal: function (cellModel) {
         var eventForEdit = cellModel.attributes.event || new EventModel({ date: cellModel.attributes.date });
 
-        if(this.eventView){
+        if (this.eventView) {
             this.eventView.model.set(eventForEdit.attributes);
             return;
         }
-       var eventModalView = new EventModalView({ model: eventForEdit });
+        var eventModalView = new EventModalView({ model: eventForEdit });
 
-       $("#event-modal").html(eventModalView.render().el);
+        $("#event-modal").html(eventModalView.render().el);
         eventModalView.show();
     },
 
+    updateUrl: function (model/*opt*/) {
+        model = model || this.currentModel;
+        this.navigate("year/" + model.attributes.year + "/month/" + model.attributes.month);
+    },
     showCalendar: function (year, month) {
         var model = new CalendarModel({
             year: parseInt(year),
             month: parseInt(month)
         });
-        
+
+        this.updateUrl(model);
+
         if (this.currentModel) {
             this.currentModel.set(model.attributes);
             return;
         }
-
-
 
         var viewParams = { model: model };
 
@@ -39,7 +43,8 @@
 
         this.currentModel = model;
 
-        this.listenTo(calendarGridView,CalendarGridView.events.editEventClick, this.onEventEdit.bind(this));
+        this.listenTo(calendarGridView, CalendarGridView.events.editEventClick, this.showEventModal.bind(this));
+        this.listenTo(this.currentModel, "change", this.updateUrl.bind(this));
 
         $("#calendar-header").html(calendarHeaderView.render().el);
         $("#calendar-grid").html(calendarGridView.render().el);

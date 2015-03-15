@@ -11,10 +11,6 @@
             "change #sel-month": "changeMonth",
             "change #sel-year": "changeYear"
         },
-
-        updateUrl: function () {
-            app.navigate("year/" + this.model.attributes.year + "/month/" + this.model.attributes.month);
-        },
         addMonthToModel: function (month) {
             var newDate = datesHelper.addMonths(this.model.toDate(), month);
             this.model.set({
@@ -49,7 +45,6 @@
             }, this.model.attributes);
 
             this.$el.html(this.template(data));
-            this.updateUrl();
             return this;
         }
     });

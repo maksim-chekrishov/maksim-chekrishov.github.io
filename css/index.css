@@ -40,9 +40,11 @@
 }
 
 
-.div-table-col:hover .cell-content .day-header .day,
+.div-table-col:hover .cell-content .day-header .day {
+    border: 1px dotted;
+}
 .div-table-col.inactive:hover .cell-content .day-header .day {
-    border: 1px dotted #333;
+    border-color:#333;
 }
 
 .div-table-col.inactive .cell-content .day-header {
@@ -53,6 +55,7 @@
         text-decoration: none;
         font-weight: 100;
         color: #CFCFCF;
+        border-color: transparent;
     }
 
 .div-table-col.has-event .cell-content {

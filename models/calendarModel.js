@@ -1,36 +1,36 @@
 ﻿var CalendarModel = Backbone.Model.extend({
-    defaults: function() {
+    defaults: function () {
         var currentDate = new Date();
         return {
             year: currentDate.getFullYear(),
-            month: currentDate.getMonth(),
-            selectedDate: null,
+            month: currentDate.getMonth()
         }
-    },
-    isValid: function () {
-        var selectedDate = this.attributes.selectedDate;
-
-        var isSelectedDayValid = !selectedDate ||
-            CalendarModel.isValidCalendarDate(selectedDate) &&
-            selectedDate.getFullYear() == this.attributes.year &&
-            selectedDate.getMonth() == this.attributes.month;
-
-        return isSelectedDayValid && CalendarModel.isValidCalendarDate(this.toDate());
     },
     toDate: function () {
         return new Date(this.attributes.year, this.attributes.month);
     },
-    initialize: function() {
-        if (!this.isValid()) {
-            this.set(this.defaults());
-        }
+    initialize: function () {
+        this.normalize();       
+    },
+    normalize: function () {
+        var date = this.toDate();
+        this.set({
+            year: date.getFullYear(),
+            month: date.getMonth()
+        });
+
+        !this.isValid() && this.set(this.defaults());
+    },
+    isValid: function () {
+        return CalendarModel.isValidCalendarDate(this.toDate())
     }
 });
 
 CalendarModel.isValidCalendarDate = function (date) {
-    if (!(date instanceof Date)) {
+    if (!_.isDate(date) || _.isNaN(date.getTime())) {
         return false;
     }
+
     var year = date.getFullYear();
 
     return date instanceof Date &&
