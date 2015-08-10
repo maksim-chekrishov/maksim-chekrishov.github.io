@@ -160,12 +160,6 @@ var SneakerReport = require('./dataObjects/sneakerReport');
              * Flag to enable global window.onerror handler
              */
             handleUncaught: true,
-            /**
-             * Flag to enable global ajax requests error handler
-             */
-            handleJqueryAjax: true,
-
-            сatchUncaught: false,
 
             ignoreLevels: [],
 

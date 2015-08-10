@@ -164,6 +164,19 @@
             </code>
         </pre>
 
+        <h3>Ignore errors </h3>
+
+        <h4>To filter events use following configuration options </h4>
+
+        <pre class="cursor-default">
+            <code>
+                Sneaker.init({
+                    ignoreLevels: ['INFO'],
+                    ignoreSourceUrlsSuffixes: ['plugins/jqxGrid.js'],
+                    ignorePagesUrlsSuffixes: ['/deprecated.html']
+                });
+            </code>
+        </pre>
 </div>
 </body>
 
