@@ -19,6 +19,71 @@
             </code>
         </pre>
 
+        <h2>Report data</h2>
+        <pre class="cursor-default">
+            <code>
+                /**
+                * Duration of javascript session
+                * @type {number}
+                */
+                SneakerReport.prototype.sessionDuration = 0;
+
+                /**
+                * URL of the document that loaded the current document.
+                * @type {string}
+                */
+                SneakerReport.prototype.referer = '';
+
+                /**
+                * URL of the document
+                * @type {string}
+                */
+                SneakerReport.prototype.pageUrl = '';
+
+                /**
+                * URL of source script
+                * @type {string}
+                */
+                SneakerReport.prototype.sourceUrl = '';
+
+                /**
+                * Report extra data
+                * @type {object}
+                */
+                SneakerReport.prototype.extra = null;
+
+                /**
+                * User agent
+                * @type {string}
+                */
+                SneakerReport.prototype.userAgent = null;
+
+                /**
+                * Error stack
+                * @type {string}
+                */
+                SneakerReport.prototype.stack = null;
+
+                /**
+                * Error message
+                * @type {string}
+                */
+                SneakerReport.prototype.message = '';
+
+                /**
+                * Report level
+                * @type {string}
+                */
+                SneakerReport.prototype.level = '';
+
+                /**
+                * Line number
+                * @type {string}
+                */
+                SneakerReport.prototype.lineNumber = '';
+            </code>
+        </pre>
+
         <h2>Usage (Click to run, and see console.)</h2>
 
         <h4>Unhandled error</h4>
@@ -152,6 +217,8 @@
             <code>
                 function customSendMethod(sneakerReport, extraData) {
                     console.log('I use my custom method to send request to my server instead of default');
+                    console.log('Sneaker report object:')
+                    console.dir(sneakerReport);
 
                     return false; // prevent calling default send method
                 }

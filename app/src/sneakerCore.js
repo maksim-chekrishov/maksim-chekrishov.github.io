@@ -34,35 +34,15 @@ var SneakerReport = require('./dataObjects/sneakerReport');
             return window.Sneaker;
         }
 
+        // see details in Sneaker.init method description
         defaultConfig = {
-            /**
-             * Some static part of report data
-             * @example
-             * {
-             *  username: {% user.username %},
-             *  sessionId: {% user.sessionId %}
-             * }
-             */
-            reportExtraData: {},
-            /**
-             * Flag to enable global window.onerror handler
-             */
             handleUncaught: true,
-            /**
-             * Flag to enable global ajax requests error handler
-             */
             handleJqueryAjax: true,
-
             сatchUncaught: false,
-
             ignoreLevels: [],
-
             ignoreSourceUrlsSuffixes: [],
-
             ignorePagesUrlsSuffixes: [],
-
             reportUrl: null,
-
             debug: false
         };
 
@@ -354,7 +334,32 @@ var SneakerReport = require('./dataObjects/sneakerReport');
         // endregion
 
         return {
-            // TODO: write comment
+            /**
+             * Init Sneaker
+             * @param {Object=} config - configuration object
+             *
+             * @param {Object=} config.reportExtraData - some additional information for each report
+             * @example
+             * {
+             *  username: {% user.username %},
+             *  sessionId: {% user.sessionId %}
+             * }
+             *
+             * @param {boolean=} [config.handleUncaught = true]  - flag to enable global window.onerror handler
+             *
+             * @param {Array.<string>=}[config.ingnoreLevels=[]] - provide ability to ignore report by report level
+             * @example ['info','warn']
+             *
+             * @param {Array.<string>=}[config.ignoreSourceUrlsSuffixes=[]] - provide ability to ignore report by source script
+             * @example ['thirdPartsPlugin.js','photorama.js']
+             *
+             * @param {Array.<string>=}[config.ignorePageUrlsSuffixes=[]] - provide ability to ignore report by page url
+             * @example ['deprecated.html']
+             *
+             * @param {string=} reportUrl - send report to this end point, or do nothing if it wasn't provided
+             *
+             * @param {boolean=} debug - flag to enable internal Sneaker debug messages
+             */
             init: function(config) {
                 sneakerSourceUrl = TraceKit.computeStackTrace(new Error()).stack[0].url;
 

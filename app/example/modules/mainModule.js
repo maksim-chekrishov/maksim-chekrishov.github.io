@@ -109,6 +109,8 @@ module.exports = (function() {
 
         function customSendMethod(sneakerReport, extraData) {
             console.log('I use my custom method to send request to my server instead of default');
+            console.log('Sneaker report object:')
+            console.dir(sneakerReport);
 
             return false; // prevent calling default send method
         }
