@@ -5,12 +5,12 @@
 
 require('tracekit');
 
-var utils = require('./sneakerUtils');
-var reportLevel = require('./dataObjects/reportLevel');
-var sneakerEvents = require('./dataObjects/sneakerEvents');
-var SneakerReport = require('./dataObjects/sneakerReport');
+var utils = require('./sneaker-utils');
+var reportLevel = require('./data-objects/report-level');
+var sneakerEvents = require('./data-objects/sneaker-events');
+var SneakerReport = require('./data-objects/sneaker-report');
 
-(function(window, $) {
+(function(window) {
 
     if (!window) {
         return;

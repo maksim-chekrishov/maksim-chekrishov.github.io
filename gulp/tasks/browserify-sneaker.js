@@ -5,7 +5,7 @@ var browserify = require('browserify'),
     helpers = require('../helpers');
 
 gulp.task('browserify-sneaker', function() {
-    var sourceFile = './app/src/sneakerCore.js',
+    var sourceFile = './app/src/sneaker-core.js',
         destFolder = './app/dest',
         destFile = 'sneaker.js';
 

@@ -7,7 +7,7 @@ var browserify = require('browserify'),
 gulp.task('browserify-example', function() {
     var sourceFile = './app/example/app.js',
         destFolder = './app/example/',
-        destFile = 'appBundle.js';
+        destFile = 'app-bundle.js';
 
     return browserify(sourceFile, {debug: true})
         .bundle()

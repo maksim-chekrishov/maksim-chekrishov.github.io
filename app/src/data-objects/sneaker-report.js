@@ -3,7 +3,7 @@
  * Created by m.chekryshov on 01.08.15.
  */
 
-var utils = require('../sneakerUtils');
+var utils = require('../sneaker-utils');
 
 module.exports = SneakerReport;
 

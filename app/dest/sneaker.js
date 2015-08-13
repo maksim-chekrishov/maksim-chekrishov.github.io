@@ -37,7 +37,7 @@ module.exports = {
  * Created by m.chekryshov on 01.08.15.
  */
 
-var utils = require('../sneakerUtils');
+var utils = require('../sneaker-utils');
 
 module.exports = SneakerReport;
 
@@ -109,7 +109,7 @@ SneakerReport.prototype.lineNumber = '';
 
 
 
-},{"../sneakerUtils":5}],4:[function(require,module,exports){
+},{"../sneaker-utils":5}],4:[function(require,module,exports){
 'use strict';
 /**
  * Created by m.chekryshov on 01.08.15.
@@ -117,12 +117,12 @@ SneakerReport.prototype.lineNumber = '';
 
 require('tracekit');
 
-var utils = require('./sneakerUtils');
-var reportLevel = require('./dataObjects/reportLevel');
-var sneakerEvents = require('./dataObjects/sneakerEvents');
-var SneakerReport = require('./dataObjects/sneakerReport');
+var utils = require('./sneaker-utils');
+var reportLevel = require('./data-objects/report-level');
+var sneakerEvents = require('./data-objects/sneaker-events');
+var SneakerReport = require('./data-objects/sneaker-report');
 
-(function(window, $) {
+(function(window) {
 
     if (!window) {
         return;
@@ -627,7 +627,7 @@ var SneakerReport = require('./dataObjects/sneakerReport');
     window.Sneaker = Sneaker;
 
 })(window)
-},{"./dataObjects/reportLevel":1,"./dataObjects/sneakerEvents":2,"./dataObjects/sneakerReport":3,"./sneakerUtils":5,"tracekit":6}],5:[function(require,module,exports){
+},{"./data-objects/report-level":1,"./data-objects/sneaker-events":2,"./data-objects/sneaker-report":3,"./sneaker-utils":5,"tracekit":6}],5:[function(require,module,exports){
 'use strict';
 /**
  * Created by m.chekryshov on 01.08.15.
