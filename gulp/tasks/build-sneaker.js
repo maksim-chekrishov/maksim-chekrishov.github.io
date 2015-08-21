@@ -4,7 +4,7 @@ var browserify = require('browserify'),
     notify = require('gulp-notify'),
     helpers = require('../helpers');
 
-gulp.task('browserify-sneaker', function() {
+gulp.task('build-sneaker', function() {
     var sourceFile = './app/src/sneaker-core.js',
         destFolder = './app/dest',
         destFile = 'sneaker.js';
