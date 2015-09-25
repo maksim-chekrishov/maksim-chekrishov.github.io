@@ -189,16 +189,6 @@ var SneakerReport = require('./data-objects/sneaker-report');
         }
 
         /**
-         * Log information and send report based on xmlHttpRequest object
-         * @param {XMLHttpRequest} xmlHttpRequest
-         */
-        function handleAjaxRequestError(xmlHttpRequest) {
-            var message = utils.format('Ajax error: {0} {1}', xmlHttpRequest.status, xmlHttpRequest.statusText);
-
-            handleMessage(message, reportLevel.ERROR, {xmlHttpRequest: xmlHttpRequest});
-        }
-
-        /**
          * Core method, describes report lifecycle:
          * Log information and send report based on exception information from TraceKit.
          * Log and send method can be extended or overridden by customer

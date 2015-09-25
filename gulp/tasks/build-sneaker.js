@@ -2,6 +2,7 @@ var browserify = require('browserify'),
     gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     notify = require('gulp-notify'),
+    uglify = require('gulp-uglify'),
     helpers = require('../helpers');
 
 gulp.task('build-sneaker', function() {
@@ -13,5 +14,6 @@ gulp.task('build-sneaker', function() {
         .bundle()
         .on('error', helpers.handleBrowserifyError)
         .pipe(source(destFile))
+        //.pipe(uglify())
         .pipe(gulp.dest(destFolder));
 });
